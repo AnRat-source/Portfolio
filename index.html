@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio of AnRat — game developer, full-stack developer, and graphics designer." />
+    <title>AnRat — Game Developer & Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #eaf0fa;
+        --muted: #aab7ca;
+        --quiet: #738099;
+        --panel: rgba(12, 21, 38, .84);
+        --line: rgba(199, 216, 244, .18);
+        --blue: #b59bff;
+        --aqua: #d7c9ff;
+        --bg: #070d19;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--bg);
+        font-family: Manrope, Arial, sans-serif;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background:
+          linear-gradient(115deg, rgba(7, 17, 32, .84), rgba(8, 13, 26, .66)),
+          radial-gradient(circle at 80% 6%, rgba(124, 105, 177, .35), transparent 30%),
+          radial-gradient(circle at 7% 42%, rgba(41, 130, 146, .18), transparent 28%);
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        opacity: .35;
+        background-image: linear-gradient(rgba(133, 165, 214, .12) 1px, transparent 1px), linear-gradient(90deg, rgba(133, 165, 214, .12) 1px, transparent 1px);
+        background-size: 46px 46px;
+        mask-image: linear-gradient(to bottom, black, transparent 82%);
+      }
+      a { color: inherit; text-decoration: none; }
+      .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+      .eyebrow, .label, .terminal, .stat-label, .window-bar, .tag {
+        font-family: "DM Mono", monospace;
+        letter-spacing: .04em;
+      }
+      .eyebrow { color: var(--aqua); font-size: .72rem; text-transform: uppercase; }
+      .site-header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 28px 0; border-bottom: 1px solid var(--line);
+      }
+      .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -.04em; }
+      .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--blue); color: var(--aqua); font-family: "DM Mono", monospace; font-size: .78rem; box-shadow: inset 0 0 18px rgba(108, 224, 210, .15); }
+      nav { display: flex; gap: 26px; color: var(--muted); font-size: .84rem; }
+      nav a:hover { color: var(--ink); }
+      .hero { min-height: 630px; display: grid; grid-template-columns: 1.04fr .96fr; gap: 58px; align-items: center; padding: 70px 0 86px; }
+      h1 { font-size: clamp(3rem, 6vw, 5.55rem); line-height: .96; letter-spacing: -.072em; margin: 18px 0 24px; max-width: 760px; }
+      .lead { max-width: 610px; font-size: 1.07rem; line-height: 1.8; color: var(--muted); }
+      .hero-skill-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; max-width: 570px; margin-top: 27px; }
+      .hero-skill { padding: 10px 12px; color: #e6deff; border: 1px solid rgba(215, 201, 255, .22); background: rgba(39, 30, 66, .45); font: .67rem "DM Mono", monospace; letter-spacing: .04em; }
+      .actions { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+      .button { display: inline-flex; align-items: center; gap: 10px; padding: 13px 18px; border: 1px solid var(--line); background: rgba(25, 39, 65, .55); font-size: .84rem; font-weight: 700; transition: .2s ease; }
+      .button:hover { transform: translateY(-2px); border-color: var(--blue); background: rgba(50, 68, 108, .65); }
+      .button.primary { background: var(--blue); border-color: var(--blue); color: #081020; }
+      .button.primary:hover { background: #a5b9ff; }
+      .terminal-card { position: relative; background: var(--panel); border: 1px solid var(--line); box-shadow: 0 26px 65px rgba(0,0,0,.32); }
+      .window-bar { display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .72rem; }
+      .window-controls { display: flex; gap: 7px; }
+      .window-controls i { width: 8px; height: 8px; border-radius: 50%; background: #6d7891; display: block; }
+      .window-controls i:last-child { background: #c77989; }
+      .profile-core { padding: 31px; }
+      .avatar { width: 64px; height: 64px; display: grid; place-items: center; margin-bottom: 22px; border: 1px solid rgba(108,224,210,.56); color: var(--aqua); background: linear-gradient(135deg, #152c43, #203454); font: 500 1.18rem "DM Mono", monospace; }
+      .profile-core h2 { margin: 0; font-size: 1.52rem; letter-spacing: -.05em; }
+      .profile-core p { color: var(--muted); line-height: 1.7; margin: 10px 0 24px; }
+      .availability { display: flex; align-items: center; gap: 8px; color: #b9f8e9; font: .72rem "DM Mono", monospace; }
+      .availability::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--aqua); box-shadow: 0 0 12px var(--aqua); }
+      .hero-showcase { position: relative; min-height: 485px; overflow: hidden; isolation: isolate; border: 1px solid var(--line); background: #17112a url("assets/deadfront.png") center / cover no-repeat; box-shadow: 0 30px 70px rgba(0, 0, 0, .4); }
+      .hero-showcase::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10, 7, 20, .2) 12%, rgba(12, 9, 23, .02) 45%, rgba(11, 8, 21, .91) 100%), linear-gradient(90deg, rgba(41, 26, 81, .53), transparent 58%); }
+      .hero-showcase::after { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .42; background-image: linear-gradient(rgba(224, 212, 255, .16) 1px, transparent 1px), linear-gradient(90deg, rgba(224, 212, 255, .16) 1px, transparent 1px); background-size: 30px 30px; mask-image: linear-gradient(to bottom, black, transparent 65%); }
+      .showcase-top { display: flex; justify-content: space-between; padding: 15px 17px; color: #f0eaff; border-bottom: 1px solid rgba(231, 221, 255, .24); background: rgba(15, 11, 28, .67); font: .68rem "DM Mono", monospace; letter-spacing: .05em; }
+      .showcase-bottom { position: absolute; right: 0; bottom: 0; left: 0; padding: 27px; }
+      .showcase-bottom span { color: var(--aqua); font: .7rem "DM Mono", monospace; letter-spacing: .08em; }
+      .showcase-bottom h2 { max-width: 360px; margin: 8px 0 8px; font-size: clamp(2rem, 4vw, 3.25rem); line-height: .95; color: #fff; }
+      .showcase-bottom p { max-width: 330px; margin: 0; color: #d5cde9; font-size: .87rem; line-height: 1.6; }
+      .showcase-stack { position: absolute; top: 66px; right: 14px; display: grid; gap: 8px; }
+      .showcase-stack span { padding: 8px 10px; color: #fff; border: 1px solid rgba(237, 228, 255, .28); background: rgba(31, 20, 59, .68); box-shadow: 0 9px 25px rgba(10, 4, 25, .23); font: .64rem "DM Mono", monospace; letter-spacing: .06em; animation: float 4s ease-in-out infinite; }
+      .showcase-stack span.active { color: #211437; border-color: var(--aqua); background: var(--aqua); box-shadow: 0 0 24px rgba(215, 201, 255, .55); }
+      .showcase-stack span:nth-child(2) { animation-delay: -1.4s; } .showcase-stack span:nth-child(3) { animation-delay: -2.5s; }
+      @keyframes float { 50% { transform: translateY(-5px); } }
+      section { padding: 84px 0; border-top: 1px solid var(--line); }
+      .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 34px; }
+      h2 { margin: 7px 0 0; font-size: clamp(1.8rem, 3.8vw, 2.8rem); letter-spacing: -.06em; }
+      .section-copy { max-width: 410px; color: var(--muted); font-size: .92rem; line-height: 1.65; margin: 0; }
+      .capabilities { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .feature-projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 18px; }
+      .feature-project, .project-card { border: 1px solid var(--line); background: rgba(12, 21, 38, .7); overflow: hidden; }
+      .current-carousel { overflow: hidden; padding-top: 5px; }
+      .slider-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 18px) / 2); gap: 18px; transition: transform .58s cubic-bezier(.22,.61,.36,1); will-change: transform; }
+      .past-carousel { overflow: hidden; padding-top: 5px; }
+      .past-carousel .slider-track { grid-auto-columns: calc((100% - 36px) / 3); }
+      .slider-card { min-width: 0; }
+      .slider-card > .project-media { padding: 0; }
+      .slider-card a { display: inline-block; color: var(--aqua); margin-top: 19px; font-size: .8rem; font-weight: 700; }
+      .slider-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 19px; }
+      .slider-dots { display: flex; gap: 8px; }
+      .slider-dots button, .slider-arrow { appearance: none; border: 0; cursor: pointer; }
+      .slider-dots button { width: 7px; height: 7px; padding: 0; border-radius: 50%; background: #66728d; transition: .2s ease; }
+      .slider-dots button[aria-current="true"] { width: 26px; border-radius: 5px; background: var(--aqua); box-shadow: 0 0 14px rgba(215, 201, 255, .48); }
+      .slider-arrows { display: flex; gap: 8px; }
+      .slider-arrow { width: 36px; height: 32px; color: var(--ink); border: 1px solid var(--line); background: rgba(31, 42, 68, .66); font-size: 1.05rem; transition: .2s ease; }
+      .slider-arrow:hover { border-color: var(--aqua); color: var(--aqua); }
+      .slider-arrow:disabled { cursor: default; opacity: .4; }
+      .project-media { aspect-ratio: 16 / 9; background: #0a101d; }
+      .video-frame iframe { width: 100%; height: 100%; display: block; border: 0; }
+      .project-copy { padding: 25px 26px 28px; }
+      .feature-project h3, .project-card h3 { margin: 10px 0 9px; font-size: 1.34rem; letter-spacing: -.05em; }
+      .feature-project p, .project-card p { color: var(--muted); line-height: 1.65; font-size: .88rem; margin: 0; }
+      .feature-project a { display: inline-block; color: var(--aqua); margin-top: 19px; font-size: .8rem; font-weight: 700; }
+      .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .project-card { transition: border-color .2s ease, transform .2s ease; }
+      .project-card:hover { border-color: rgba(127, 157, 255, .7); transform: translateY(-3px); }
+      .project-card img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #101a29; }
+      .project-card > div { padding: 20px 21px 23px; }
+      .archive-card { min-height: 100%; display: flex; align-items: center; background: linear-gradient(145deg, rgba(57, 40, 93, .85), rgba(13, 21, 37, .82)); }
+      .archive-card > div { padding: 28px; }
+      .archive-card h3 { font-size: 1.45rem; }
+      .current-card { max-width: 560px; }
+      .archive-cta { margin-top: 18px; padding: 27px 29px; display: flex; align-items: center; gap: 22px; border: 1px solid var(--line); background: linear-gradient(100deg, rgba(24, 44, 72, .72), rgba(12, 21, 38, .6)); }
+      .archive-cta p { color: var(--muted); font-size: .9rem; line-height: 1.6; margin: 0 auto 0 0; }
+      .capability { min-height: 315px; padding: 0 28px 29px; display: flex; flex-direction: column; justify-content: end; background: linear-gradient(145deg, rgba(20, 42, 67, .74), rgba(13, 21, 37, .88)); border: 1px solid var(--line); position: relative; overflow: hidden; }
+      .capability::before { content: ""; position: absolute; inset: 0 0 auto; height: 5px; background: linear-gradient(90deg, var(--aqua), transparent); opacity: .8; }
+      .capability:nth-child(2)::before { background: linear-gradient(90deg, var(--blue), transparent); }
+      .capability h3 { font-size: 1.5rem; letter-spacing: -.05em; margin: 0 0 12px; }
+      .capability p { color: var(--muted); line-height: 1.7; margin: 0; max-width: 500px; }
+      .facts { display: flex; gap: 26px; border-top: 1px solid var(--line); margin-top: 25px; padding-top: 18px; }
+      .fact { flex: 1; }
+      .stat-label { display: block; color: var(--quiet); font-size: .61rem; margin-bottom: 6px; }
+      .fact strong { font-size: .84rem; }
+      .toolkit { display: grid; grid-template-columns: .85fr 1.15fr; gap: 18px; }
+      .plain-panel { padding: 30px; border: 1px solid var(--line); background: rgba(12, 21, 38, .56); }
+      .plain-panel h3 { margin: 0 0 13px; font-size: 1.1rem; letter-spacing: -.035em; }
+      .plain-panel p { margin: 0; line-height: 1.75; color: var(--muted); font-size: .91rem; }
+      .tag-list { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+      .tag { color: #c8d5ed; padding: 7px 10px; border: 1px solid var(--line); font-size: .68rem; background: rgba(48, 65, 100, .22); }
+      .contact-block { text-align: center; padding: 102px 0; }
+      .contact-block h2 { max-width: 620px; margin: 9px auto 20px; }
+      .contact-block p { max-width: 500px; margin: 0 auto 28px; color: var(--muted); line-height: 1.7; }
+      footer { padding: 28px 0 42px; display: flex; justify-content: space-between; gap: 15px; border-top: 1px solid var(--line); color: var(--quiet); font: .7rem "DM Mono", monospace; }
+      @media (max-width: 720px) {
+        .shell { width: min(100% - 28px, 1180px); }
+        nav { display: none; }
+        .hero, .toolkit, .capabilities, .feature-projects, .project-grid { grid-template-columns: 1fr; }
+        .slider-track { grid-auto-columns: 100%; }
+        .past-carousel .slider-track { grid-auto-columns: 100%; }
+        .hero { gap: 32px; padding: 58px 0 64px; }
+        .hero-showcase { min-height: 405px; }
+        .showcase-bottom { padding: 22px; }
+        .terminal-card { max-width: 430px; }
+        .section-head, footer { align-items: flex-start; flex-direction: column; }
+        .archive-cta { align-items: flex-start; flex-direction: column; gap: 12px; }
+        section { padding: 62px 0; }
+        .capability { min-height: 0; padding-top: 90px; }
+        .facts { gap: 12px; }
+      }
+      @media (prefers-reduced-motion: reduce) { .showcase-stack span { animation: none; } }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="site-header">
+        <a class="brand" href="#top" aria-label="AnRat home"><span class="brand-mark">AR</span><span>AnRat</span></a>
+        <nav aria-label="Main navigation"><a href="#projects">Current work</a><a href="#past-highlights">Past projects</a><a href="#about">Profile</a><a href="#contact">Contact</a></nav>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <div>
+            <span class="eyebrow">Game developer · Full-stack developer · Graphics designer</span>
+            <h1 id="hero-title">I build the systems that make games feel alive.</h1>
+            <p class="lead">I’m AnRat — a freelance developer and designer creating games, interactive tools, websites, and visual interfaces that people want to keep exploring.</p>
+            <div class="hero-skill-list" aria-label="Core skills"><span class="hero-skill">GAME SYSTEMS &amp; COMBAT</span><span class="hero-skill">3D SCENES &amp; SHADERS</span><span class="hero-skill">FULL-STACK WEB</span><span class="hero-skill">UI &amp; GRAPHIC DESIGN</span></div>
+            <div class="actions">
+              <a class="button primary" href="#work">Explore my work <span aria-hidden="true">→</span></a>
+              <a class="button" href="mailto:seph@anrat.link">Start a conversation <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <aside class="hero-showcase" data-featured-builds aria-label="Featured build">
+            <div class="showcase-top"><span>FEATURED BUILDS</span><span data-feature-index>01 / 03</span></div>
+            <div class="showcase-stack" aria-hidden="true"><span data-feature-name="Rat ACS">RAT ACS</span><span data-feature-name="Velocity">VELOCITY</span><span data-feature-name="Deadfront">DEADFRONT</span></div>
+            <div class="showcase-bottom"><span data-feature-label>COMBAT SYSTEMS</span><h2 data-feature-title>Rat ACS</h2><p data-feature-description>A flexible, all-in-one solution for Roblox combat systems.</p></div>
+          </aside>
+        </section>
+
+        <section id="projects" aria-labelledby="projects-title">
+          <div class="section-head">
+            <div><span class="eyebrow">01 / current projects</span><h2 id="projects-title">Work in motion.</h2></div>
+            <p class="section-copy">The current slate: active game development projects with room to grow as new work reaches a presentable milestone.</p>
+          </div>
+          <div class="current-carousel" id="current-carousel" aria-roledescription="carousel" aria-label="Current projects">
+            <div class="slider-track">
+              <article class="project-card slider-card">
+                <div class="project-media video-frame"><iframe src="https://www.youtube-nocookie.com/embed/YMbU8wqO-d8?rel=0" title="Rat ACS showcase" loading="lazy" allowfullscreen></iframe></div>
+                <div class="project-copy"><span class="eyebrow">Current project / game systems</span><h3>Rat ACS</h3><p>A custom ACS mod designed as a flexible, all-in-one solution for Roblox combat systems.</p><a href="https://discord.gg/UDsjHHn55r" target="_blank" rel="noreferrer">Follow development on Discord <span aria-hidden="true">↗</span></a></div>
+              </article>
+              <article class="project-card slider-card">
+                <div class="project-media video-frame"><iframe src="https://www.youtube-nocookie.com/embed/RozasclvBMU?rel=0" title="Velocity showcase" loading="lazy" allowfullscreen></iframe></div>
+                <div class="project-copy"><span class="eyebrow">Current project / game design</span><h3>Velocity</h3><p>A high-paced, futuristic shooter built around mech-style player-versus-player combat.</p><a href="https://www.youtube.com/@An_Rat" target="_blank" rel="noreferrer">Watch more work <span aria-hidden="true">↗</span></a></div>
+              </article>
+              <article class="project-card slider-card">
+                <img src="assets/treelands-reborn.jpg" alt="TreeLands Reborn game artwork" loading="lazy" />
+                <div><span class="eyebrow">Current project / game remake</span><h3>TreeLands Reborn</h3><p>A modern remaster of the classic TreeLands experience.</p></div>
+              </article>
+            </div>
+            <div class="slider-controls">
+              <div class="slider-dots" aria-label="Current project slides"></div>
+              <div class="slider-arrows"><button class="slider-arrow" type="button" data-direction="previous" aria-label="Previous projects">←</button><button class="slider-arrow" type="button" data-direction="next" aria-label="Next projects">→</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="past-highlights" aria-labelledby="past-title">
+          <div class="section-head">
+            <div><span class="eyebrow">02 / past project highlights</span><h2 id="past-title">A few projects from the archive.</h2></div>
+            <p class="section-copy">Earlier game development, systems design, and procedural tooling selected from the original portfolio.</p>
+          </div>
+          <div class="past-carousel" id="past-carousel" data-visible="3" aria-roledescription="carousel" aria-label="Past projects">
+            <div class="slider-track">
+              <article class="project-card slider-card"><img src="assets/deadfront.png" alt="Deadfront game scene" loading="lazy" /><div><span class="eyebrow">Survival game</span><h3>Deadfront</h3><p>A zombie-wave survival game that reached a peak of 7.7K concurrent players.</p></div></article>
+              <article class="project-card slider-card"><img src="assets/drone-system.gif" alt="Drone system flying above a forest" loading="lazy" /><div><span class="eyebrow">Systems design</span><h3>Drone System</h3><p>A high-quality drone system developed for Broken Studios.</p></div></article>
+              <article class="project-card slider-card"><img src="assets/cqc-training.gif" alt="Procedurally generated CQC training environment" loading="lazy" /><div><span class="eyebrow">Procedural tools</span><h3>CQC Training</h3><p>A room generator that brings randomization to close-quarters training.</p></div></article>
+              <article class="project-card slider-card"><img src="assets/volumetric-fog.gif" alt="Volumetric fog demonstration" loading="lazy" /><div><span class="eyebrow">Visual systems</span><h3>Volumetric Fog</h3><p>A real-time fog system for atmospheric and horror-focused environments.</p></div></article>
+              <article class="project-card slider-card"><img src="assets/acs-converter.gif" alt="ACS animation converter demonstration" loading="lazy" /><div><span class="eyebrow">Developer tools</span><h3>ACS Keyframe Converter</h3><p>A tool that converts Roblox keyframe animations into CFrame animations for ACS.</p></div></article>
+              <article class="project-card slider-card"><img src="assets/raytracing.gif" alt="Raytracing demonstration in Roblox" loading="lazy" /><div><span class="eyebrow">Rendering experiment</span><h3>Raytracing in Roblox</h3><p>An experimental raytracing system created in Roblox Studio.</p></div></article>
+              <article class="project-card slider-card"><img src="assets/bounce-lighting.gif" alt="Procedural bounce lighting demonstration" loading="lazy" /><div><span class="eyebrow">Lighting research</span><h3>Procedural Bounce Lighting</h3><p>A real-time raytracing-inspired solution for bounce lighting.</p></div></article>
+              <article class="project-card slider-card"><img src="assets/thermal-sight.png" alt="Thermal sight demonstration" loading="lazy" /><div><span class="eyebrow">Visual systems</span><h3>Thermal Sight</h3><p>A realistic thermal-vision sight system currently being developed further.</p></div></article>
+              <article class="project-card slider-card archive-card"><div><span class="eyebrow">Full archive</span><h3>More project detail.</h3><p>Open the full archive for the remaining project notes, links, and media.</p><a href="past-projects.html">Explore archive <span aria-hidden="true">→</span></a></div></article>
+            </div>
+            <div class="slider-controls">
+              <div class="slider-dots" aria-label="Past project slides"></div>
+              <div class="slider-arrows"><button class="slider-arrow" type="button" data-direction="previous" aria-label="Previous projects">←</button><button class="slider-arrow" type="button" data-direction="next" aria-label="Next projects">→</button></div>
+            </div>
+          </div>
+          <div class="archive-cta"><span class="eyebrow">Full archive</span><p>Browse the original project archive as a dedicated page.</p><a class="button" href="past-projects.html">Open project archive <span aria-hidden="true">→</span></a></div>
+        </section>
+
+        <section id="work" aria-labelledby="work-title">
+          <div class="section-head">
+            <div><span class="eyebrow">03 / core disciplines</span><h2 id="work-title">Two sides of the same craft.</h2></div>
+            <p class="section-copy">Technical structure and visual direction work best together. My practice covers both, from the first interaction to the final layer of polish.</p>
+          </div>
+          <div class="capabilities">
+            <article class="capability">
+              <span class="label eyebrow">Development / 01</span>
+              <h3>Game Development</h3>
+              <p>I build the systems, tools, and simulations behind a game. The goal is always the same: translate a strange idea into something people can genuinely interact with.</p>
+              <div class="facts"><div class="fact"><span class="stat-label">Years active</span><strong data-start-year="2018">8 years</strong></div><div class="fact"><span class="stat-label">Current</span><strong>Freelance</strong></div><div class="fact"><span class="stat-label">Prior teams</span><strong>Byfrost · Broken Studios</strong></div></div>
+            </article>
+            <article class="capability">
+              <span class="label eyebrow">Design + engineering / 02</span>
+              <h3>Full-Stack & Graphics</h3>
+              <p>I pair usable front ends and supporting systems with considered UI, visual design, 3D scenes, and shaders. The result is work that feels cohesive rather than assembled.</p>
+              <div class="facts"><div class="fact"><span class="stat-label">Years active</span><strong data-start-year="2024">2 years</strong></div><div class="fact"><span class="stat-label">Current</span><strong>Freelance</strong></div><div class="fact"><span class="stat-label">Since</span><strong>2024</strong></div></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="about" aria-labelledby="about-title">
+          <div class="section-head"><div><span class="eyebrow">04 / working style</span><h2 id="about-title">Curious by default. Intentional in execution.</h2></div></div>
+          <div class="toolkit">
+            <article class="plain-panel"><h3>From concept to usable thing</h3><p>I enjoy the whole path: shaping an idea, building the mechanics, defining the interface, and refining the final experience. That range is especially useful for personal projects, prototypes, and teams that need one person who understands the whole picture.</p></article>
+            <article class="plain-panel"><h3>Areas of interest</h3><p>Games, anime, interactive web experiences, quality-of-life tools, graphic design, 3D scenes, and shaders. I’m always looking for the small interaction or visual detail that makes an experience more engaging.</p><div class="tag-list"><span class="tag">GAME SYSTEMS</span><span class="tag">WEB INTERFACES</span><span class="tag">UI DESIGN</span><span class="tag">3D & SHADERS</span><span class="tag">TOOLS</span><span class="tag">GRAPHICS</span></div></article>
+          </div>
+        </section>
+
+        <section id="contact" class="contact-block" aria-labelledby="contact-title">
+          <span class="eyebrow">05 / get in touch</span>
+          <h2 id="contact-title">Have an interesting idea worth making?</h2>
+          <p>I’m available for freelance work and thoughtful collaborations across games, interactive projects, design, and web development.</p>
+          <div class="actions" style="justify-content:center"><a class="button primary" href="mailto:seph@anrat.link">Email AnRat <span aria-hidden="true">↗</span></a><a class="button" href="https://discord.gg/UDsjHHn55r" target="_blank" rel="noreferrer">Discord <span aria-hidden="true">↗</span></a></div>
+        </section>
+      </main>
+
+      <footer><span>© 2026 AnRat</span><span>Game developer · Designer · Builder</span><a href="https://www.youtube.com/@An_Rat" target="_blank" rel="noreferrer">YouTube ↗</a></footer>
+    </div>
+    <script>
+      (() => {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        function initialiseCarousel(carousel) {
+          const track = carousel.querySelector('.slider-track');
+          const slides = [...carousel.querySelectorAll('.slider-card')];
+          const dots = carousel.querySelector('.slider-dots');
+          const arrows = carousel.querySelectorAll('.slider-arrow');
+          const desktopVisible = Number(carousel.dataset.visible || 2);
+          let current = 0;
+          let timer;
+
+          const perView = () => window.matchMedia('(max-width: 720px)').matches ? 1 : desktopVisible;
+          const positions = () => Math.max(1, slides.length - perView() + 1);
+
+          function renderDots() {
+            dots.replaceChildren(...Array.from({ length: positions() }, (_, index) => {
+              const button = document.createElement('button');
+              button.type = 'button';
+              button.setAttribute('aria-label', `Show project set ${index + 1}`);
+              button.addEventListener('click', () => { current = index; render(); restart(); });
+              return button;
+            }));
+          }
+
+          function render() {
+            current = Math.min(current, positions() - 1);
+            const gap = parseFloat(getComputedStyle(track).gap) || 0;
+            const distance = (slides[0]?.getBoundingClientRect().width || 0) + gap;
+            track.style.transform = `translateX(-${current * distance}px)`;
+            [...dots.children].forEach((dot, index) => dot.setAttribute('aria-current', String(index === current)));
+          }
+
+          function advance(direction = 1) { current = (current + direction + positions()) % positions(); render(); }
+          function stop() { window.clearInterval(timer); }
+          function start() { if (!reducedMotion.matches && positions() > 1) timer = window.setInterval(() => advance(), 5000); }
+          function restart() { stop(); start(); }
+
+          arrows.forEach(button => button.addEventListener('click', () => { advance(button.dataset.direction === 'next' ? 1 : -1); restart(); }));
+          carousel.addEventListener('mouseenter', stop);
+          carousel.addEventListener('mouseleave', start);
+          carousel.addEventListener('focusin', stop);
+          carousel.addEventListener('focusout', start);
+          window.addEventListener('resize', () => { renderDots(); render(); });
+          reducedMotion.addEventListener('change', restart);
+
+          renderDots();
+          render();
+          start();
+        }
+
+        function initialiseFeaturedBuilds(showcase) {
+          const builds = [
+            { name: 'Rat ACS', label: 'COMBAT SYSTEMS', description: 'A flexible, all-in-one solution for Roblox combat systems.', image: 'assets/rat-acs.gif' },
+            { name: 'Velocity', label: 'FUTURISTIC PVP', description: 'A high-paced shooter built around mech-style player-versus-player combat.', image: 'assets/velocity.gif' },
+            { name: 'Deadfront', label: 'ZOMBIE SURVIVAL', description: 'A player-driven zombie-wave survival game that reached 7.7K concurrent players.', image: 'assets/deadfront.png' }
+          ];
+          const buildIndex = showcase.querySelector('[data-feature-index]');
+          const label = showcase.querySelector('[data-feature-label]');
+          const title = showcase.querySelector('[data-feature-title]');
+          const description = showcase.querySelector('[data-feature-description]');
+          const stack = [...showcase.querySelectorAll('[data-feature-name]')];
+          let current = Math.floor(Math.random() * builds.length);
+          let timer;
+
+          function render() {
+            const build = builds[current];
+            buildIndex.textContent = `0${current + 1} / 0${builds.length}`;
+            label.textContent = build.label;
+            title.textContent = build.name;
+            description.textContent = build.description;
+            showcase.style.backgroundImage = `url("${build.image}")`;
+            showcase.setAttribute('aria-label', `Featured build: ${build.name}`);
+            stack.forEach(item => item.classList.toggle('active', item.dataset.featureName === build.name));
+          }
+
+          function rotate() {
+            current = (current + 1 + Math.floor(Math.random() * (builds.length - 1))) % builds.length;
+            render();
+          }
+
+          function stop() { window.clearInterval(timer); }
+          function start() { if (!reducedMotion.matches) timer = window.setInterval(rotate, 20000); }
+          function restart() { stop(); start(); }
+
+          showcase.addEventListener('mouseenter', stop);
+          showcase.addEventListener('mouseleave', start);
+          showcase.addEventListener('focusin', stop);
+          showcase.addEventListener('focusout', start);
+          reducedMotion.addEventListener('change', restart);
+          render();
+          start();
+        }
+
+        document.querySelectorAll('[data-start-year]').forEach(element => {
+          const years = Math.max(0, new Date().getFullYear() - Number(element.dataset.startYear));
+          element.textContent = `${years} ${years === 1 ? 'year' : 'years'}`;
+        });
+
+        document.querySelectorAll('[aria-roledescription="carousel"]').forEach(initialiseCarousel);
+        document.querySelectorAll('[data-featured-builds]').forEach(initialiseFeaturedBuilds);
+      })();
+    </script>
+  </body>
+</html>
