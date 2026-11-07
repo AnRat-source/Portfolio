@@ -184,6 +184,17 @@
       .plain-panel { padding: 30px; border: 1px solid var(--line); background: rgba(12, 21, 38, .56); }
       .plain-panel h3 { margin: 0 0 13px; font-size: 1.1rem; letter-spacing: -.035em; }
       .plain-panel p { margin: 0; line-height: 1.75; color: var(--muted); font-size: .91rem; }
+      .about-layout { display: grid; grid-template-columns: minmax(230px, .66fr) minmax(0, 1.34fr); gap: 18px; }
+      .about-portrait { position: relative; min-height: 430px; overflow: hidden; border: 1px solid var(--line); background: #151124; }
+      .about-portrait img { width: 100%; height: 100%; position: absolute; inset: 0; display: block; object-fit: cover; object-position: center; filter: saturate(.84) contrast(1.04); }
+      .about-portrait::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(10, 7, 22, .86) 100%); }
+      .portrait-label { position: absolute; z-index: 1; right: 15px; bottom: 14px; left: 15px; color: #eee9ff; font: .66rem "DM Mono", monospace; letter-spacing: .08em; }
+      .about-copy { display: grid; gap: 18px; }
+      .about-intro { padding: 34px; border: 1px solid var(--line); background: linear-gradient(135deg, rgba(39, 29, 69, .7), rgba(12, 21, 38, .56)); }
+      .about-intro h3 { max-width: 600px; margin: 0 0 15px; font-size: clamp(1.5rem, 3vw, 2.35rem); line-height: 1.02; letter-spacing: -.06em; }
+      .about-intro p { max-width: 650px; margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.8; }
+      .about-details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .about-details .plain-panel { min-height: 0; }
       .tag-list { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
       .tag { color: #c8d5ed; padding: 7px 10px; border: 1px solid var(--line); font-size: .68rem; background: rgba(48, 65, 100, .22); }
       .contact-block { text-align: center; padding: 102px 0; }
@@ -195,7 +206,9 @@
         .site-header { top: 10px; width: min(100% - 28px, 1180px); }
         .site-shell > .shell { padding-top: 104px; }
         nav { display: none; }
-        .hero, .toolkit, .capabilities, .feature-projects, .project-grid { grid-template-columns: 1fr; }
+        .hero, .toolkit, .about-layout, .capabilities, .feature-projects, .project-grid { grid-template-columns: 1fr; }
+        .about-portrait { min-height: 370px; }
+        .about-details { grid-template-columns: 1fr; }
         .slider-track { grid-auto-columns: 100%; }
         .past-carousel .slider-track { grid-auto-columns: 100%; }
         .hero { gap: 32px; padding: 58px 0 64px; }
@@ -230,7 +243,7 @@
         <div class="header-terminal">aqua@desktop: ~/portfolio</div>
         <div class="header-main">
           <a class="brand" href="#top" aria-label="AnRat home"><span class="brand-mark">AR</span><span class="brand-copy"><strong>AnRat — Game Developer &amp; Designer</strong><small>Games, systems, and visuals that move.</small></span></a>
-          <nav aria-label="Main navigation"><a href="#top">Portfolio</a><a href="#projects">Projects</a><a href="#past-highlights">Archive</a><a href="#about">Profile</a><a href="#contact">Contact</a></nav>
+          <nav aria-label="Main navigation"><a href="#top">Portfolio</a><a href="#projects">Projects</a><a href="#past-highlights">Archive</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
         </div>
       </header>
 
@@ -339,13 +352,16 @@
         </section>
 
         <section id="about" aria-labelledby="about-title">
-          <br>
-          <br>
-          <br>
-          <div class="section-head"><div><span class="eyebrow">04 / working style</span><h2 id="about-title">Curious by default. Intentional in execution.</h2></div></div>
-          <div class="toolkit">
-            <article class="plain-panel"><h3>From concept to usable thing</h3><p>I enjoy the whole path: shaping an idea, building the mechanics, defining the interface, and refining the final experience. That range is especially useful for personal projects, prototypes, and teams that need one person who understands the whole picture.</p></article>
-            <article class="plain-panel"><h3>Areas of interest</h3><p>Games, anime, interactive web experiences, quality-of-life tools, graphic design, 3D scenes, and shaders. I’m always looking for the small interaction or visual detail that makes an experience more engaging.</p><div class="tag-list"><span class="tag">GAME SYSTEMS</span><span class="tag">WEB INTERFACES</span><span class="tag">UI DESIGN</span><span class="tag">3D & SHADERS</span><span class="tag">TOOLS</span><span class="tag">GRAPHICS</span></div></article>
+          <div class="section-head"><div><span class="eyebrow">04 / about me</span><h2 id="about-title">Who am I?</h2></div><p class="section-copy">The person behind the projects, experiments, and slightly overbuilt interfaces.</p></div>
+          <div class="about-layout">
+            <figure class="about-portrait"><img src="assets/anrat-portrait.jpg" alt="Portrait of AnRat" loading="lazy" /><figcaption class="portrait-label">ANRAT / SEPH · GAME DEV + DESIGN</figcaption></figure>
+            <div class="about-copy">
+              <article class="about-intro"><h3>Hi, I’m AnRat — you can call me Seph.</h3><p>I’m a game developer, full-stack developer, and graphics designer who likes anime, games, and anything that moves. I build the systems, tools, visuals, and small quality-of-life details that turn a strange idea into something people can actually play with.</p></article>
+              <div class="about-details">
+                <article class="plain-panel"><h3>How I work</h3><p>I like owning the full path from concept to finished experience: gameplay mechanics, interfaces, supporting systems, and the final visual polish. That mix keeps projects cohesive rather than pieced together.</p></article>
+                <article class="plain-panel"><h3>Always exploring</h3><p>Outside the main build, I’m usually experimenting with interactive websites, 3D scenes, shaders, graphics, and tools that make creative work smoother.</p><div class="tag-list"><span class="tag">GAME SYSTEMS</span><span class="tag">WEB INTERFACES</span><span class="tag">UI DESIGN</span><span class="tag">3D &amp; SHADERS</span><span class="tag">TOOLS</span><span class="tag">GRAPHICS</span></div></article>
+              </div>
+            </div>
           </div>
         </section>
 
