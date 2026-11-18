@@ -52,29 +52,29 @@
         mask-image: linear-gradient(to bottom, black, transparent 82%);
       }
       .cover-intro { position: fixed; inset: 0; z-index: 0; display: grid; height: 100dvh; min-height: 100svh; place-items: center; overflow: hidden; isolation: isolate; pointer-events: none; background: #0e0719; }
-      .intro-scene { position: absolute; inset: 0; z-index: 0; min-height: 100%; overflow: hidden; background: #0e0719 url("assets/intro-backdrop.png") center / cover no-repeat; }
-      .intro-webgl { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; min-height: 100%; opacity: 0; transition: opacity .35s ease; }
-      .intro-scene.is-webgl-ready { background: var(--bg); }
-      .intro-scene.is-webgl-ready .intro-webgl { opacity: 1; }
-      .intro-scene.is-webgl-ready + .intro-quote { opacity: 0; }
-      .intro-layer { position: absolute; inset: -10%; pointer-events: none; }
-      .intro-layer--sky { z-index: 2; background: radial-gradient(ellipse 70% 40% at 50% -8%, rgba(36, 18, 72, .26), transparent 72%); }
-      .intro-layer--distant { z-index: 3; opacity: .55; background: radial-gradient(ellipse 52% 27% at 70% 42%, rgba(217, 174, 255, .2), transparent 72%), radial-gradient(ellipse 42% 22% at 29% 48%, rgba(137, 91, 205, .13), transparent 74%); mix-blend-mode: screen; }
-      .intro-layer--monolith { z-index: 4; opacity: .72; background: radial-gradient(ellipse 16% 39% at 69% 39%, rgba(229, 197, 255, .22), transparent 72%); mix-blend-mode: screen; }
-      .intro-layer--valley { z-index: 5; opacity: .35; background: linear-gradient(to bottom, transparent 43%, rgba(38, 15, 70, .12) 67%, rgba(7, 4, 16, .56) 100%); }
-      .intro-layer--foreground { display: none; }
-      .cover-intro::before { content: ""; position: absolute; inset: 0; z-index: 7; background: linear-gradient(90deg, rgba(10, 5, 20, .55), transparent 50%, rgba(10, 5, 20, .42)), linear-gradient(to bottom, rgba(9, 5, 18, .16) 36%, rgba(14, 7, 25, .94) 100%); }
+      .intro-scene { position: absolute; inset: 0; min-height: 100%; overflow: hidden; background: #0e0719; }
+      .intro-webgl, .intro-background, .intro-foreground { position: absolute; inset: 0; pointer-events: none; background-position: center; background-repeat: no-repeat; background-size: cover; }
+      .intro-background-video { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+      .intro-webgl { z-index: 2; inset: -5%; width: 110%; height: 110%; transform: translate3d(-4.55%, -4.55%, 0) scale(1.02); opacity: 0; filter: blur(6px) brightness(1.13) saturate(1.24) drop-shadow(0 0 28px rgba(218, 104, 255, .72)); transition: opacity .4s ease; }
+      .intro-scene.is-depth-ready .intro-webgl, .intro-scene.is-webgl-ready .intro-webgl { opacity: 1; }
+      .intro-scene.is-depth-ready .intro-background, .intro-scene.is-webgl-ready .intro-background { opacity: 0; }
+      .intro-background { z-index: 1; inset: -5%; background-image: url("assets/intro-background.png"); transform: translate3d(0, 0, 0) scale(1.05); will-change: transform; }
+      .intro-foreground { z-index: 6; background-image: url("assets/intro-foreground.png"); }
+      .cover-intro::before { content: ""; position: absolute; inset: 0; z-index: 7; background: linear-gradient(90deg, rgba(10, 5, 20, .55), transparent 50%, rgba(10, 5, 20, .42)), radial-gradient(circle at 52% 30%, rgba(234, 168, 255, .22), transparent 34%), radial-gradient(circle at 72% 45%, rgba(181, 111, 255, .16), transparent 30%), linear-gradient(to bottom, rgba(9, 5, 18, .16) 36%, rgba(14, 7, 25, .94) 100%); mix-blend-mode: screen; }
       .cover-intro::after { display: none; }
-      .intro-quote { position: relative; z-index: 9; width: min(760px, calc(100% - 48px)); text-align: center; text-shadow: 0 8px 36px rgba(0, 0, 0, .58); }
+      .intro-quote { position: relative; z-index: 5; width: min(760px, calc(100% - 48px)); text-align: center; text-shadow: 0 8px 36px rgba(0, 0, 0, .58); }
       .intro-quote p { margin: 0; color: #fff; font-size: clamp(2.25rem, 5.3vw, 5.3rem); font-weight: 800; letter-spacing: -.075em; line-height: .97; }
       .intro-quote span { display: block; margin-top: 20px; color: var(--aqua); font: .72rem "DM Mono", monospace; letter-spacing: .16em; text-transform: uppercase; }
       .scroll-cue { position: fixed; z-index: 55; bottom: 30px; left: 50%; display: grid; gap: 9px; color: #ede7ff; font: .68rem "DM Mono", monospace; letter-spacing: .13em; text-align: center; text-transform: uppercase; pointer-events: none; transform: translateX(-50%); transition: opacity .35s ease, transform .35s ease; }
       .scroll-cue.is-hidden { opacity: 0; transform: translate(-50%, 14px); }
       .scroll-cue::after { content: "↓"; color: var(--aqua); font: 1.35rem/1 Arial, sans-serif; animation: scroll-nudge 1.8s ease-in-out infinite; }
-      .site-shell { position: relative; z-index: 1; min-height: 100vh; margin-top: 115svh; margin-top: 115dvh; isolation: isolate; background-color: var(--bg); background-image: linear-gradient(rgba(190, 169, 255, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(190, 169, 255, .045) 1px, transparent 1px); background-size: 58px 58px; }
+      .site-shell { position: relative; z-index: 1; min-height: 100vh; margin-top: 100svh; margin-top: 100dvh; isolation: isolate; background-color: var(--bg); background-image: linear-gradient(rgba(190, 169, 255, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(190, 169, 255, .045) 1px, transparent 1px); background-size: 58px 58px; }
       .site-shell > .shell { padding-top: 118px; }
       .site-shell::before { content: ""; position: absolute; z-index: -1; top: -250px; right: 0; left: 0; height: 252px; background: linear-gradient(to bottom, transparent, var(--bg) 84%); pointer-events: none; }
       @keyframes scroll-nudge { 50% { transform: translateY(7px); } }
+      @keyframes lantern-sway { from { transform: rotate(-2deg) translateX(-2px); } to { transform: rotate(2.5deg) translateX(3px); } }
+      @keyframes canopy-sway { from { transform: translateX(-3px) rotate(-.2deg); } to { transform: translateX(4px) rotate(.25deg); } }
+      @media (prefers-reduced-motion: reduce) { .intro-lantern, .intro-canopy { animation: none; } }
       a { color: inherit; text-decoration: none; }
       .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
       .eyebrow, .label, .terminal, .stat-label, .window-bar, .tag {
@@ -226,14 +226,7 @@
   </head>
   <body>
     <section class="cover-intro" aria-labelledby="intro-quote">
-      <div class="intro-scene" aria-hidden="true">
-        <canvas class="intro-webgl"></canvas>
-        <div class="intro-layer intro-layer--sky" data-parallax-scroll="68"></div>
-        <div class="intro-layer intro-layer--distant" data-parallax-scroll="44"></div>
-        <div class="intro-layer intro-layer--monolith" data-parallax-scroll="72"></div>
-        <div class="intro-layer intro-layer--valley" data-parallax-scroll="88"></div>
-        <div class="intro-layer intro-layer--foreground" data-parallax-scroll="112"></div>
-      </div>
+      <div class="intro-scene" aria-hidden="true"><div class="intro-background"></div><video class="intro-background-video" src="assets/intro-background-pingpong.mp4" muted loop autoplay playsinline preload="auto"></video><canvas class="intro-webgl"></canvas><div class="intro-foreground"></div></div>
       <div class="intro-quote"><p id="intro-quote">“Make it strange.<br />Make it work.<br />Make it memorable.”</p><span>Interactive worlds · systems · visuals</span></div>
     </section>
     <div class="scroll-cue" id="scroll-cue" aria-hidden="true">Scroll for portfolio</div>
@@ -515,11 +508,14 @@
             void main() {
               vUv = coverUv(aUv);
               float depth = texture2D(uDepth, vUv).r;
-              float meshDepth = pow(depth, .72);
+              // Compress the map's black-to-white range before moving vertices.
+              // It keeps the foreground in front without pulling sharp silhouettes
+              // into long, visible strips.
+              float meshDepth = mix(.22, .78, smoothstep(.08, .94, depth));
               vec2 basePosition = aPosition + vec2(0.0, uCameraLift);
               vec2 displacedPosition = basePosition + uOffset * meshDepth;
               vWall = aWall;
-              gl_Position = vec4(mix(displacedPosition, basePosition, aWall), mix(.98 - meshDepth * 1.96, .98, aWall), 1.0);
+              gl_Position = vec4(mix(displacedPosition, basePosition, aWall), mix(.97 - meshDepth * 1.7, .97, aWall), 1.0);
             }
           `;
           const fragmentSource = `
@@ -578,9 +574,9 @@
 
           const columns = 160;
           const rows = 90;
-          // Keep the depth mesh well beyond the viewport so its displaced lower edge
-          // cannot expose the canvas background while the intro is moving.
-          const meshOverscan = 1.72;
+          // A small overscan keeps the displaced edges hidden without turning the
+          // intro artwork into an overly cropped close-up.
+          const meshOverscan = 1.28;
           const frontVertexCount = (columns + 1) * (rows + 1);
           const perimeter = [];
           for (let x = 0; x <= columns; x++) perimeter.push(x);
@@ -695,6 +691,11 @@
             asset.addEventListener('error', reject, { once: true });
             asset.src = source;
           });
+          const loadVideo = video => new Promise((resolve, reject) => {
+            const ready = () => { video.play().catch(() => {}); resolve(video); };
+            if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) ready();
+            else { video.addEventListener('loadeddata', ready, { once: true }); video.addEventListener('error', reject, { once: true }); }
+          });
           const makeTexture = asset => {
             const texture = gl.createTexture();
             gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -708,11 +709,12 @@
           };
           const textCanvas = document.createElement('canvas');
           const textContext = textCanvas.getContext('2d');
+          const drawTextInMesh = false;
           const textLayers = [
-            { name: 'quoteLineOne', text: '“Make it strange.', depth: .88, line: 0 },
-            { name: 'quoteLineTwo', text: 'Make it work.', depth: .84, line: 1 },
-            { name: 'quoteLineThree', text: 'Make it memorable.”', depth: .7, line: 2 },
-            { name: 'descriptor', text: 'INTERACTIVE WORLDS · SYSTEMS · VISUALS', depth: .5, line: 3 }
+            { name: 'quoteLineOne', text: '“Make it strange.', depth: -.22, line: 0 },
+            { name: 'quoteLineTwo', text: 'Make it work.', depth: -.16, line: 1 },
+            { name: 'quoteLineThree', text: 'Make it memorable.”', depth: -.1, line: 2 },
+            { name: 'descriptor', text: 'INTERACTIVE WORLDS · SYSTEMS · VISUALS', depth: .02, line: 3 }
           ].map(layer => ({ ...layer, texture: gl.createTexture() }));
           let textSize = '';
           const updateTextTextures = (width, height) => {
@@ -750,9 +752,10 @@
               gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textCanvas);
             });
           };
-          Promise.all([loadImage('assets/intro-backdrop.png'), loadImage('assets/intro-depth-map.png')]).then(([image, depthMap]) => {
+          const introVideo = document.querySelector('.intro-background-video');
+          Promise.all([loadVideo(introVideo), loadImage('assets/intro-depth-map.png')]).then(([image, depthMap]) => {
             gl.activeTexture(gl.TEXTURE0);
-            makeTexture(image);
+            const sceneTexture = makeTexture(image);
             gl.uniform1i(uniforms.texture, 0);
             gl.activeTexture(gl.TEXTURE1);
             makeTexture(depthMap);
@@ -775,31 +778,39 @@
                 canvas.height = height;
               }
               gl.viewport(0, 0, width, height);
+              // Re-upload the current GIF frame so the depth mesh keeps the
+              // generated skyline loop alive instead of freezing on frame one.
+              gl.activeTexture(gl.TEXTURE0);
+              gl.bindTexture(gl.TEXTURE_2D, sceneTexture);
+              gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+              gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
               updateTextTextures(width, height);
               gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-              gl.useProgram(textProgram);
-              bindText();
-              gl.uniform1i(textUniforms.texture, 2);
-              gl.enable(gl.BLEND);
-              gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-              textLayers.forEach(layer => {
-                gl.activeTexture(gl.TEXTURE2);
-                gl.bindTexture(gl.TEXTURE_2D, layer.texture);
-                gl.uniform1f(textUniforms.depth, layer.depth);
-                gl.drawArrays(gl.TRIANGLES, 0, 6);
-              });
-              gl.disable(gl.BLEND);
+              if (drawTextInMesh) {
+                gl.useProgram(textProgram);
+                bindText();
+                gl.uniform1i(textUniforms.texture, 2);
+                gl.enable(gl.BLEND);
+                gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+                textLayers.forEach(layer => {
+                  gl.activeTexture(gl.TEXTURE2);
+                  gl.bindTexture(gl.TEXTURE_2D, layer.texture);
+                  gl.uniform1f(textUniforms.depth, layer.depth);
+                  gl.drawArrays(gl.TRIANGLES, 0, 6);
+                });
+                gl.disable(gl.BLEND);
+              }
 
               gl.useProgram(program);
               bindMesh();
               gl.uniform2f(uniforms.resolution, width, height);
-              gl.uniform2f(uniforms.imageResolution, image.naturalWidth, image.naturalHeight);
+              gl.uniform2f(uniforms.imageResolution, image.videoWidth || image.naturalWidth, image.videoHeight || image.naturalHeight);
               const scroll = Math.min(window.scrollY / Math.max(window.innerHeight * 2, 1), 1);
-              gl.uniform2f(uniforms.offset, pointer.x * .11, pointer.y * .075 + scroll * 8.5);
+              gl.uniform2f(uniforms.offset, pointer.x * .018, pointer.y * .012 + scroll * .08);
               // Negative clip-space Y moves the complete artwork down, independently
               // of the cursor and scroll-based depth offsets.
-              const introBaseY = -0.16;
-              gl.uniform1f(uniforms.cameraLift, introBaseY + scroll * -1);
+              const introBaseY = -0.03;
+              gl.uniform1f(uniforms.cameraLift, introBaseY + scroll * -.08);
               gl.uniform3f(uniforms.edgeColor, 14 / 255, 7 / 255, 25 / 255);
               gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
             };
@@ -817,11 +828,79 @@
               pointer.y = (.5 - event.clientY / window.innerHeight) * 2;
               requestRender();
             }, { passive: true });
-            render();
+            const animateBackground = () => { render(); window.requestAnimationFrame(animateBackground); };
+            animateBackground();
           }).catch(() => {});
         }
 
+        // The original mesh renderer is kept here for reference only. The live
+        // intro uses the depth-aware screen-space pass below, which does not pull
+        // the background geometry apart at silhouettes.
         initialiseIntroShader(document.querySelector('.intro-webgl'));
+        function initialiseDepthParallax(canvas) {
+          if (!canvas || reducedMotion.matches) return;
+          const scene = canvas.closest('.intro-scene');
+          const gl = canvas.getContext('webgl', { alpha: false, antialias: false, powerPreference: 'low-power' });
+          if (!scene || !gl) return;
+          const compile = (type, source) => {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            return gl.getShaderParameter(shader, gl.COMPILE_STATUS) ? shader : null;
+          };
+          const vertex = compile(gl.VERTEX_SHADER, `attribute vec2 p; varying vec2 uv; void main(){ uv=(p+1.0)*.5; gl_Position=vec4(p,0.,1.); }`);
+          const fragment = compile(gl.FRAGMENT_SHADER, `precision mediump float; varying vec2 uv; uniform sampler2D image; uniform sampler2D depthMap; uniform vec2 pointer; uniform float scroll; uniform vec2 resolution; uniform vec2 imageResolution;
+            vec2 cover(vec2 point){ float screen=resolution.x/resolution.y; float source=imageResolution.x/imageResolution.y; if(screen>source) point.y=(point.y-.5)*(source/screen)+.5; else point.x=(point.x-.5)*(screen/source)+.5; return point; }
+            void main(){ vec2 base=cover(uv); float depth=texture2D(depthMap,base).r; vec2 movement=pointer*(.003+depth*.016)+vec2(0.,scroll*(.004+depth*.012)); vec2 sampleUv=clamp(base-movement,vec2(.002),vec2(.998)); gl_FragColor=texture2D(image,sampleUv); }`);
+          if (!vertex || !fragment) return;
+          const program = gl.createProgram();
+          gl.attachShader(program, vertex); gl.attachShader(program, fragment); gl.linkProgram(program);
+          if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+          const buffer = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+          const position = gl.getAttribLocation(program, 'p');
+          const uniform = name => gl.getUniformLocation(program, name);
+          const imageUniform = uniform('image'); const depthUniform = uniform('depthMap');
+          const pointerUniform = uniform('pointer'); const scrollUniform = uniform('scroll');
+          const resolutionUniform = uniform('resolution'); const imageResolutionUniform = uniform('imageResolution');
+          const load = source => new Promise((resolve, reject) => { const asset = new Image(); asset.onload = () => resolve(asset); asset.onerror = reject; asset.src = source; });
+          const texture = (asset, unit) => { const target = gl.createTexture(); gl.activeTexture(unit); gl.bindTexture(gl.TEXTURE_2D, target); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, asset); };
+          Promise.all([load('assets/intro-background.png'), load('assets/intro-depth-map.png')]).then(([image, depth]) => {
+            texture(image, gl.TEXTURE0); texture(depth, gl.TEXTURE1);
+            gl.useProgram(program); gl.uniform1i(imageUniform, 0); gl.uniform1i(depthUniform, 1);
+            const pointer = { x: 0, y: 0 }; let queued = false;
+            const render = () => { queued = false; const ratio = Math.min(devicePixelRatio || 1, 1.5); const width = Math.max(1, Math.round(canvas.clientWidth * ratio)); const height = Math.max(1, Math.round(canvas.clientHeight * ratio)); if(canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; } gl.viewport(0,0,width,height); gl.bindBuffer(gl.ARRAY_BUFFER, buffer); gl.enableVertexAttribArray(position); gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0); gl.uniform2f(pointerUniform,pointer.x,pointer.y); gl.uniform1f(scrollUniform,Math.min(window.scrollY / Math.max(innerHeight * 1.8, 1), 1)); gl.uniform2f(resolutionUniform,width,height); gl.uniform2f(imageResolutionUniform,image.naturalWidth,image.naturalHeight); gl.drawArrays(gl.TRIANGLES,0,6); };
+            const request = () => { if(!queued) { queued=true; requestAnimationFrame(render); } };
+            window.addEventListener('pointermove', event => { if(!matchMedia('(pointer: fine)').matches) return; pointer.x=(event.clientX / innerWidth - .5) * 2.; pointer.y=(.5 - event.clientY / innerHeight) * 2.; request(); }, { passive:true });
+            window.addEventListener('scroll', request, { passive:true }); window.addEventListener('resize', request, { passive:true });
+            scene.classList.add('is-depth-ready'); render();
+          }).catch(() => {});
+        }
+        // The mesh renderer above owns the canvas for the original 3D parallax.
+        (() => {
+          const background = document.querySelector('.intro-background');
+          const foreground = document.querySelector('.intro-foreground');
+          if (!background || !foreground || reducedMotion.matches) return;
+          const pointer = { x: 0, y: 0 };
+          let queued = false;
+          const render = () => {
+            queued = false;
+            const scroll = Math.min(window.scrollY / Math.max(window.innerHeight * 1.8, 1), 1);
+            const foregroundScroll = Math.min(window.scrollY, window.innerHeight * 1.15) * -.7;
+            background.style.transform = `translate3d(${pointer.x * 13}px, ${pointer.y * 9 - scroll * 30}px, 0) scale(1.05)`;
+            foreground.style.transform = `translate3d(0, ${foregroundScroll}px, 0)`;
+          };
+          const requestRender = () => { if (!queued) { queued = true; window.requestAnimationFrame(render); } };
+          window.addEventListener('pointermove', event => {
+            if (!window.matchMedia('(pointer: fine)').matches || window.scrollY >= window.innerHeight) return;
+            pointer.x = event.clientX / window.innerWidth - .5;
+            pointer.y = event.clientY / window.innerHeight - .5;
+            requestRender();
+          }, { passive: true });
+          window.addEventListener('scroll', requestRender, { passive: true });
+          render();
+        })();
 
         document.querySelectorAll('[aria-roledescription="carousel"]').forEach(initialiseCarousel);
         document.querySelectorAll('[data-featured-builds]').forEach(initialiseFeaturedBuilds);
