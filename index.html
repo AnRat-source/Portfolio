@@ -76,13 +76,13 @@
       @keyframes canopy-sway { from { transform: translateX(-3px) rotate(-.2deg); } to { transform: translateX(4px) rotate(.25deg); } }
       @media (prefers-reduced-motion: reduce) { .intro-lantern, .intro-canopy { animation: none; } }
       a { color: inherit; text-decoration: none; }
-      .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+      .shell { width: min(1440px, calc(100% - 64px)); margin: 0 auto; }
       .eyebrow, .label, .terminal, .stat-label, .window-bar, .tag {
         font-family: "DM Mono", monospace;
         letter-spacing: .04em;
       }
       .eyebrow { color: var(--aqua); font-size: .72rem; text-transform: uppercase; }
-      .site-header { position: fixed; top: 20px; left: 50%; z-index: 60; width: min(1180px, calc(100% - 40px)); overflow: hidden; border: 1px solid rgba(220, 209, 255, .32); background: rgba(19, 12, 34, .88); box-shadow: 0 18px 42px rgba(0, 0, 0, .34); transform: translateX(-50%); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+      .site-header { position: fixed; top: 20px; left: 50%; z-index: 60; width: min(1440px, calc(100% - 64px)); overflow: hidden; border: 1px solid rgba(220, 209, 255, .32); background: rgba(19, 12, 34, .88); box-shadow: 0 18px 42px rgba(0, 0, 0, .34); transform: translateX(-50%); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
       .header-terminal { padding: 5px 13px; color: #d8d0ed; border-bottom: 1px solid rgba(220, 209, 255, .2); background: rgba(7, 5, 15, .42); font: .61rem "DM Mono", monospace; letter-spacing: .04em; }
       .header-main { display: flex; min-height: 59px; align-items: center; gap: 18px; padding: 8px 13px; }
       .brand { display: flex; min-width: 0; align-items: center; gap: 12px; }
@@ -197,6 +197,18 @@
       .about-details .plain-panel { min-height: 0; }
       .tag-list { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
       .tag { color: #c8d5ed; padding: 7px 10px; border: 1px solid var(--line); font-size: .68rem; background: rgba(48, 65, 100, .22); }
+      .github-layout { display: grid; grid-template-columns: minmax(260px, .65fr) minmax(0, 1.35fr); gap: 18px; }
+      .github-profile, .github-chart { padding: 30px; border: 1px solid var(--line); background: rgba(12, 21, 38, .56); }
+      .github-profile { display: grid; align-content: start; gap: 16px; }
+      .github-profile h3 { margin: 0; font-size: 1.45rem; letter-spacing: -.05em; }
+      .github-profile p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.7; }
+      .github-meta { display: flex; gap: 20px; padding-top: 16px; border-top: 1px solid var(--line); font: .75rem "DM Mono", monospace; color: var(--aqua); }
+      .github-chart-head { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-bottom: 20px; }
+      .github-chart-head h3 { margin: 0; font-size: 1.1rem; }
+      .github-status { color: var(--quiet); font: .7rem "DM Mono", monospace; }
+      .contribution-grid { display: grid; grid-template-columns: repeat(18, minmax(9px, 1fr)); grid-template-rows: repeat(7, minmax(9px, 1fr)); grid-auto-flow: column; gap: 7px; }
+      .contribution-cell { aspect-ratio: 1; min-height: 12px; border: 1px solid rgba(215, 201, 255, .08); background: rgba(215, 201, 255, .04); }
+      .contribution-cell[data-level="1"] { background: rgba(181, 155, 255, .26); } .contribution-cell[data-level="2"] { background: rgba(181, 155, 255, .48); } .contribution-cell[data-level="3"] { background: rgba(215, 201, 255, .8); box-shadow: 0 0 12px rgba(181, 155, 255, .45); }
       .contact-block { text-align: center; padding: 102px 0; }
       .contact-block h2 { max-width: 620px; margin: 9px auto 20px; }
       .contact-block p { max-width: 500px; margin: 0 auto 28px; color: var(--muted); line-height: 1.7; }
@@ -206,7 +218,7 @@
         .site-header { top: 10px; width: min(100% - 28px, 1180px); }
         .site-shell > .shell { padding-top: 104px; }
         nav { display: none; }
-        .hero, .toolkit, .about-layout, .capabilities, .feature-projects, .project-grid { grid-template-columns: 1fr; }
+        .hero, .toolkit, .about-layout, .capabilities, .feature-projects, .project-grid, .github-layout { grid-template-columns: 1fr; }
         .about-portrait { min-height: 370px; }
         .about-details { grid-template-columns: 1fr; }
         .slider-track { grid-auto-columns: 100%; }
@@ -349,17 +361,25 @@
           <div class="about-layout">
             <figure class="about-portrait"><img src="assets/anrat-portrait.jpg" alt="Portrait of AnRat" loading="lazy" /><figcaption class="portrait-label">ANRAT / SEPH · GAME DEV + DESIGN</figcaption></figure>
             <div class="about-copy">
-              <article class="about-intro"><h3>Hi, I’m AnRat — you can call me Seph.</h3><p>I make games, websites, graphics, and whatever little side project I’m obsessed with that week. I like anime, games, and anything that moves, lights up, or has a button to press.</p></article>
+              <article class="about-intro"><h3>Hi, I’m AnRat — you can call me Seph.</h3><p>I make games, websites, graphics, and whatever little side project has my attention that week. Most of my work starts as “wouldn’t it be cool if…” and ends with way too many tabs open, a bunch of notes, and something that actually works.</p></article>
               <div class="about-details">
-                <article class="plain-panel"><h3>How I work</h3><p>I like being there from the first dumb idea to the finished thing: mechanics, UI, code, visuals, all of it. It helps when one person knows how the whole mess fits together.</p></article>
-                <article class="plain-panel"><h3>Always exploring</h3><p>When I’m not working on a game, I’m probably messing around with websites, 3D scenes, shaders, graphics, or a tool that saves me five minutes.</p><div class="tag-list"><span class="tag">GAME SYSTEMS</span><span class="tag">WEB INTERFACES</span><span class="tag">UI DESIGN</span><span class="tag">3D &amp; SHADERS</span><span class="tag">TOOLS</span><span class="tag">GRAPHICS</span></div></article>
+                <article class="plain-panel"><h3>How I work</h3><p>I like being around for the whole thing: the first dumb idea, the mechanics, the UI, the bugs nobody expected, and the part where it finally feels right. Being able to handle both code and visuals keeps the work from feeling disconnected.</p></article>
+                <article class="plain-panel"><h3>Always exploring</h3><p>When I’m not building a game, I’m usually poking at websites, 3D scenes, shaders, graphics, or some tiny tool that saves me five minutes. Those little experiments tend to become real projects eventually.</p><div class="tag-list"><span class="tag">GAME SYSTEMS</span><span class="tag">WEB INTERFACES</span><span class="tag">UI DESIGN</span><span class="tag">3D &amp; SHADERS</span><span class="tag">TOOLS</span><span class="tag">GRAPHICS</span></div></article>
               </div>
             </div>
           </div>
         </section>
 
+        <section id="github" aria-labelledby="github-title">
+          <div class="section-head"><div><span class="eyebrow">05 / github activity</span><h2 id="github-title">Stuff I actually ship.</h2></div><p class="section-copy">A small look at the public work and experiments I keep pushing when I’m not busy breaking something else.</p></div>
+          <div class="github-layout">
+            <article class="github-profile"><span class="eyebrow">ANRAT-SOURCE / GITHUB</span><h3>Code, experiments, and half-finished ideas.</h3><p>I use GitHub for the projects worth keeping track of — tools, site work, experiments, and whatever I’m currently trying to make better.</p><div class="github-meta"><span id="github-repos">Loading repos…</span><span id="github-followers"></span></div><a class="button" href="https://github.com/AnRat-source" target="_blank" rel="noreferrer">Open GitHub</a></article>
+            <article class="github-chart"><div class="github-chart-head"><h3>Recent public activity</h3><span class="github-status" id="github-status">Loading activity…</span></div><div class="contribution-grid" id="contribution-grid" aria-label="Recent GitHub public activity chart"></div></article>
+          </div>
+        </section>
+
         <section id="contact" class="contact-block" aria-labelledby="contact-title">
-          <span class="eyebrow">05 / get in touch</span>
+          <span class="eyebrow">06 / get in touch</span>
           <h2 id="contact-title">Got something cool in mind?</h2>
           <p>I’m open for freelance work and collabs — games, websites, design, or whatever weird project you’re cooking up.</p>
           <div class="actions" style="justify-content:center"><a class="button primary" href="mailto:seph@anrat.link">Email AnRat <span aria-hidden="true">↗</span></a><a class="button" href="https://discord.gg/UDsjHHn55r" target="_blank" rel="noreferrer">Discord <span aria-hidden="true">↗</span></a></div>
@@ -887,9 +907,8 @@
           const render = () => {
             queued = false;
             const scroll = Math.min(window.scrollY / Math.max(window.innerHeight * 1.8, 1), 1);
-            const foregroundScroll = Math.min(window.scrollY, window.innerHeight * 1.15) * -.7;
             background.style.transform = `translate3d(${pointer.x * 13}px, ${pointer.y * 9 - scroll * 30}px, 0) scale(1.05)`;
-            foreground.style.transform = `translate3d(0, ${foregroundScroll}px, 0)`;
+            foreground.style.transform = 'translate3d(0, 0, 0)';
           };
           const requestRender = () => { if (!queued) { queued = true; window.requestAnimationFrame(render); } };
           window.addEventListener('pointermove', event => {
@@ -904,6 +923,38 @@
 
         document.querySelectorAll('[aria-roledescription="carousel"]').forEach(initialiseCarousel);
         document.querySelectorAll('[data-featured-builds]').forEach(initialiseFeaturedBuilds);
+        (() => {
+          const grid = document.querySelector('#contribution-grid');
+          const status = document.querySelector('#github-status');
+          if (!grid) return;
+          const weeks = 18, days = 7, total = weeks * days;
+          const activity = new Array(total).fill(0);
+          const dayIndex = date => {
+            const start = new Date();
+            start.setHours(0, 0, 0, 0);
+            start.setDate(start.getDate() - (total - 1));
+            return Math.floor((new Date(date).setHours(0, 0, 0, 0) - start) / 86400000);
+          };
+          const draw = () => { grid.innerHTML = activity.map(value => `<span class="contribution-cell" data-level="${Math.min(3, value)}"></span>`).join(''); };
+          draw();
+          fetch('https://api.github.com/users/AnRat-source')
+            .then(response => response.ok ? response.json() : Promise.reject())
+            .then(profile => { document.querySelector('#github-repos').textContent = `${profile.public_repos} public repos`; document.querySelector('#github-followers').textContent = `${profile.followers} followers`; })
+            .catch(() => { document.querySelector('#github-repos').textContent = 'AnRat-source on GitHub'; });
+          const refreshActivity = () => {
+            status.textContent = 'Updating activity…';
+            activity.fill(0);
+            return fetch('https://api.github.com/users/AnRat-source/events/public?per_page=100', { cache: 'no-store' })
+            .then(response => response.ok ? response.json() : Promise.reject())
+            .then(events => { events.forEach(event => { const index = dayIndex(event.created_at); if (index >= 0 && index < total) activity[index] = Math.min(3, activity[index] + 1); }); draw(); status.textContent = 'Activity refreshed'; })
+            .catch(() => { status.textContent = 'Public activity preview'; });
+          };
+          refreshActivity();
+          window.setInterval(refreshActivity, 15 * 60 * 1000);
+          document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) refreshActivity();
+          });
+        })();
       })();
     </script>
   </body>
