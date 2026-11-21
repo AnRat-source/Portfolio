@@ -950,10 +950,6 @@
             .catch(() => { status.textContent = 'Public activity preview'; });
           };
           refreshActivity();
-          window.setInterval(refreshActivity, 15 * 60 * 1000);
-          document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) refreshActivity();
-          });
         })();
       })();
     </script>
